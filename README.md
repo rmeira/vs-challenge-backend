@@ -1,34 +1,40 @@
-<p align="center">
-    <img src="https://i.imgur.com/2LUR2yy.png">
-</p>
+# VS Challenge
 
-## Sobre a VEUS
+This project contain the backend app for "VS Challenge" read more in (CHALLENGE)[./CHALLENGE.md]
 
-Há 25 anos no mercado, a **Veus Technology** é uma empresa brasileira ligada ao segmento de saúde com foco na inovação tecnológica. É responsável por vários projetos pioneiros e estratégicos na área laboratorial, médica e recentemente hospitalar.
+# Installation
 
-## Desafio VS
+For running this project you need to install Docker and Docker Swarm Cluster(if you don't want to running with Docker swarm, just running in docker-compose).
 
-Você deve implementar uma API utilizando *PHP* > 7.0. Nós recomendamos que você tente manter o seu códgo o mais simples possível utilizando os frameworks *Laravel, Lumen ou Synfony*. Se você precisar de qualquer informação adicional ou esclarecimento, você pode nos contatar pelo e-mail: **sistemas@veus.com.br**.
+The steps below are for the Ubuntu 20.04
+```shell
 
-Vamos imaginar que a sua empresa possua um e-commerce e venda alguns produtos para laboratórios e hospitais...
+# To install docker on linux ubuntu
+curl -sSL https://get.docker.com/ | sh
+sudo usermod -aG docker <you user>
 
-Sua tarefa é desenvolver um **CRUD** de Produtos e implementar um serviço de buscas desses produtos. Um produto possui nome, marca, preço e quantidade em estoque.
-A API deve requerer **autenticação** e permitir __search query__ através do método **GET** e suportar filtros opcionais nos campos do produto.
+# Reboot your pc
 
-Por exemplo: Um cliente deve conseguir buscar todas as seringas da marca BUNZL fazendo a seguinte requisição:
+# Disabled IPV6
+sudo vim /etc/sysctl.conf
 
-`https://example.com/api/v1/products?q=seringa&filter=brand:BUNZL`
+# Add this lines on the end of the file sysctl.conf
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
 
-A API também deve suportar __pagination__, __versioning__ e __sorting__.
+# For activate running the command bellow
+sudo sysctl -p
 
-Sinta-se livre para usar qualquer library ou framework da sua preferência mas a regra de negócio deve estar o mais desaclopada possível deles.
+# Now lets init docker swarm
+docker swarm init
 
-Por favor, **não se esqueça** de providenciar uma pequena documentação de como levantar e testar o seu projeto.
+# For init the project running the command bellow
+docker stack deploy --compose-file docker-compose.yml vs-challenge
 
-Bônus:
-* Docker
-* Unit Test
-* User Interface
+# For stop the project
+docker stack rm challenge
 
----
-Você será avaliado de acordo com a senioridade da posição a qual está aplicando. Ao finalizar o desafio você deve submeter o **Pull Request** com o seu código para a avaliação, após isso nos entrarem em contato com você através do e-mail passando um feedback do seu projeto.
+```
+
+
