@@ -7,7 +7,6 @@ Route::redirect('/', '/swagger', 301);
 Route::namespace('v1')->prefix('v1')->group(function () {
     Route::prefix('auth')->group(function () {
         Route::post('login', 'LoginController@login')->name('auth.login');
-        Route::post('logout', 'LoginController@logout')->name('auth.logout');
     });
 
     Route::middleware('auth:api')->group(function () {

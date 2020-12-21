@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
 
-class UserRequest extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -15,7 +15,8 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => "required|email|unique:users,email,$this->id,id"
+            'name' => 'required',
+            'email' => "required|email|unique:users,email,$this->id,id",
         ];
     }
 

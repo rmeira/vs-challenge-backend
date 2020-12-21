@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Routing\Controller;
 
@@ -117,7 +118,7 @@ class UserController extends Controller
      *     ),
      * ),
      */
-    public function store(UserRequest $request)
+    public function store(UserStoreRequest $request)
     {
         return response()->json($this->user->create($request->all()));
     }
@@ -207,7 +208,7 @@ class UserController extends Controller
      *     )
      * ),
      */
-    public function update(UserRequest $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
         return response()->json($this->user->update($id, $request->all()));
     }
