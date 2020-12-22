@@ -1,6 +1,6 @@
 # VS Challenge
 
-Projeto backend API para o desafio "VS Challenge" leia mais sobre o desafio em (CHALLENGE)[./CHALLENGE.md]
+Projeto backend API para o desafio "VS Challenge" leia mais sobre o desafio em [CHALLENGE](./CHALLENGE.md)
 
 ## Installation
 
