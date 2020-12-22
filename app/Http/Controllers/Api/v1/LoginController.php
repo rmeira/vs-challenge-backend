@@ -41,10 +41,6 @@ class LoginController extends Controller
      *      url="localhost",
      *      description="localhost"
      * ),
-     * @OA\Server(
-     *      url="https://vs-challenge-backend.herokuapp.com",
-     *      description="production"
-     * ),
      * @OA\Schemes(format="http")
      * @OA\SecurityScheme(
      *      securityScheme="token",
