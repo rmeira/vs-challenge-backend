@@ -12,3 +12,7 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 .cache
+.local
+.config
+.bash_history
+.rnd

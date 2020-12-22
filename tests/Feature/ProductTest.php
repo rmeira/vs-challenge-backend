@@ -2,21 +2,21 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
+use App\Models\Product;
 
-class UserTest extends LoginTest
+class ProductTest extends LoginTest
 {
 
     /**
-     * Test get users
+     * Test get products
      *
      * @return void
      */
-    public function testGetUsers()
+    public function testGetProducts()
     {
         $tokenContent = $this->testLogin();
 
-        $this->getJson('/v1/users', [
+        $this->getJson('/v1/products', [
             'Accept' => 'application/json',
             'Authorization' => "{$tokenContent->token_type} {$tokenContent->token}"
         ])->assertJsonStructure([
@@ -34,7 +34,9 @@ class UserTest extends LoginTest
             'total',
             'data' => ['*' => [
                 'name',
-                'email',
+                'brand',
+                'value',
+                'stock',
                 'created_at',
                 'updated_at'
             ]]
@@ -42,15 +44,15 @@ class UserTest extends LoginTest
     }
 
     /**
-     * Test Create user
+     * Test Create product
      *
      * @return void
      */
-    public function testCreateUser()
+    public function testCreateProduct()
     {
         $tokenContent = $this->testLogin();
 
-        $this->postJson('/v1/users', [], [
+        $this->postJson('/v1/products', [], [
             'Accept' => 'application/json',
             'Authorization' => "{$tokenContent->token_type} {$tokenContent->token}"
         ])
@@ -59,32 +61,34 @@ class UserTest extends LoginTest
                 "message",
                 "errors" => [
                     "name",
-                    "email",
+                    "brand",
+                    "value",
+                    "stock",
                 ]
             ]);
 
-        $user = User::factory()->make();
+        $product = Product::factory()->make();
 
-        $this->postJson('/v1/users', $user->toArray(), [
+        $this->postJson('/v1/products', $product->toArray(), [
             'Accept' => 'application/json',
             'Authorization' => "{$tokenContent->token_type} {$tokenContent->token}"
         ])
             ->assertStatus(200)
-            ->assertSee($user->toArray());
+            ->assertSee($product->toArray());
     }
 
     /**
-     * Test Create user
+     * Test Create product
      *
      * @return void
      */
-    public function testUpdateUser()
+    public function testUpdateProduct()
     {
         $tokenContent = $this->testLogin();
 
-        $user = User::factory()->create();
+        $product = Product::factory()->create();
 
-        $this->putJson('/v1/users/' . $user->id, [], [
+        $this->putJson('/v1/products/' . $product->id, [], [
             'Accept' => 'application/json',
             'Authorization' => "{$tokenContent->token_type} {$tokenContent->token}"
         ])
@@ -93,54 +97,58 @@ class UserTest extends LoginTest
                 "message",
                 "errors" => [
                     "name",
-                    "email",
+                    "brand",
+                    "value",
+                    "stock",
                 ]
             ]);
 
-        $this->putJson('/v1/users/' . $user->id, $user->toArray(), [
+        $this->putJson('/v1/products/' . $product->id, $product->toArray(), [
             'Accept' => 'application/json',
             'Authorization' => "{$tokenContent->token_type} {$tokenContent->token}"
         ])
             ->assertStatus(200)
-            ->assertSee($user->toArray());
+            ->assertSee($product->toArray());
     }
 
     /**
-     * Test show user
+     * Test show product
      *
      * @return void
      */
-    public function testShowUser()
+    public function testShowProduct()
     {
         $tokenContent = $this->testLogin();
 
-        $user = User::factory()->create();
+        $product = Product::factory()->create();
 
-        $this->getJson('/v1/users/' . $user->id, [
+        $this->getJson('/v1/products/' . $product->id, [
             'Accept' => 'application/json',
             'Authorization' => "{$tokenContent->token_type} {$tokenContent->token}"
         ])
             ->assertStatus(200)
             ->assertJsonStructure([
-                'name',
-                'email',
+                "name",
+                "brand",
+                "value",
+                "stock",
                 'created_at',
                 'updated_at'
             ]);
     }
 
     /**
-     * Test delete user
+     * Test delete product
      *
      * @return void
      */
-    public function testDeleteUser()
+    public function testDeleteProduct()
     {
         $tokenContent = $this->testLogin();
 
-        $user = User::factory()->create();
+        $product = Product::factory()->create();
 
-        $this->deleteJson('/v1/users/' . $user->id, [], [
+        $this->deleteJson('/v1/products/' . $product->id, [], [
             'Accept' => 'application/json',
             'Authorization' => "{$tokenContent->token_type} {$tokenContent->token}"
         ])

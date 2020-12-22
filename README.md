@@ -1,10 +1,12 @@
 # VS Challenge
 
-This project contain the backend app for "VS Challenge" read more in (CHALLENGE)[./CHALLENGE.md]
+Projeto backend API para o desafio "VS Challenge" leia mais sobre o desafio em (CHALLENGE)[./CHALLENGE.md]
 
-# Installation
+## Installation
 
-For running this project you need to install Docker and Docker Swarm Cluster(if you don't want to running with Docker swarm, just running in docker-compose).
+Para rodar o projeto você precisa ter o Docker e o Docker Swarm(Cluster) iniciado em sua maquina, para isso siga os passos abaixo
+
+
 
 The steps below are for the Ubuntu 20.04
 ```shell
@@ -33,8 +35,36 @@ docker swarm init
 docker stack deploy --compose-file docker-compose.yml vs-challenge
 
 # For stop the project
-docker stack rm challenge
+docker stack rm vs-challenge
 
 ```
+
+Após instalar o docker e rodar o projeto com o comando `docker stack deploy --compose-file docker-compose.yml vs-challenge`, você precisa acessar o container no qual está rodando o projeto para rodar outro comando, para isso siga os passos abaixo:
+
+```shell
+# Execute o comando abaixo para listar os containers em execução
+docker ps
+
+# O retorno desse comando será parecido com isso:
+# CONTAINER ID   IMAGE                                                       COMMAND                  CREATED       STATUS       PORTS                 NAMES
+# b4a38e3208a5   rafaelmit/docker-php-8.0-local-laravel-development:latest   "/scripts/init.sh"       9 hours ago   Up 9 hours   80/tcp                vs-challenge_backend.1.nizo02r0c29kgvwyu0cyz0zmj
+# 68c957050a06   mysql:5.7                                                   "docker-entrypoint.s…"   9 hours ago   Up 9 hours   3306/tcp, 33060/tcp   vs-challenge_mysql.1.h7dw1y5xfqdwa9zpzewutkdcg
+# 40f53c8b6d30   mailhog/mailhog:latest                                      "MailHog"                9 hours ago   Up 9 hours   1025/tcp, 8025/tcp    vs-challenge_mailhog.1.stz2qvp6ojlxj0romu2lfe13y
+# 21d2d1768808   redis:latest                                                "docker-entrypoint.s…"   9 hours ago   Up 9 hours   6379/tcp              vs-challenge_redis.1.wp7zaj5hdy7mra62gs5ic57da
+
+# Agora veja o container que está rodando que tem o começo do nome "vs-challenge_backend" e copie o container id
+
+# Agora execute o comando abaixo com com o container id
+docker exec -it -u www-data <container-id> bash
+
+# Com isso você vai estar acessando o container, agora vamos executar os seguintes comandos.
+
+php artisan migrate && php artisan passport:install
+
+# Agora para rodar os testes
+php artisan test
+```
+
+
 
 
