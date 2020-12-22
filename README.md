@@ -6,8 +6,6 @@ Projeto backend API para o desafio "VS Challenge" leia mais sobre o desafio em (
 
 Para rodar o projeto você precisa ter o Docker e o Docker Swarm(Cluster) iniciado em sua maquina, para isso siga os passos abaixo
 
-
-
 The steps below are for the Ubuntu 20.04
 ```shell
 
@@ -59,12 +57,23 @@ docker exec -it -u www-data <container-id> bash
 
 # Com isso você vai estar acessando o container, agora vamos executar os seguintes comandos.
 
-php artisan migrate && php artisan passport:install
+php artisan migrate --seed && php artisan passport:install
 
 # Agora para rodar os testes
 php artisan test
 ```
 
+## Acessos local
+
+-   [Api](localhost)
+-   [Mailhog](localhost:8025)
+
+## Libs
+
+-   [laravel/laravel](https://laravel.com/)
+-   [laravel/passport](https://github.com/laravel/passport)
+-   [spatie/laravel-query-builder](https://github.com/spatie/laravel-query-builder)
+-   [zircote/swagger-php](https://github.com/zircote/swagger-php)
 
 
 
