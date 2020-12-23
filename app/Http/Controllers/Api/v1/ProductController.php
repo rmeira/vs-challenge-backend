@@ -51,6 +51,12 @@ class ProductController extends Controller
      *     ),
      *     @OA\Parameter(
      *         in="query",
+     *         name="filter[name_or_brand]",
+     *         parameter="filter[brand]",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Parameter(
+     *         in="query",
      *         name="fields[products]=id,name",
      *         parameter="fields[products]=id,name",
      *         @OA\Schema(type="string")
@@ -65,6 +71,12 @@ class ProductController extends Controller
      *         in="query",
      *         name="page",
      *         parameter="page",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Parameter(
+     *         in="query",
+     *         name="limit",
+     *         parameter="limit",
      *         @OA\Schema(type="integer")
      *     ),
      *     @OA\Response(response="200",

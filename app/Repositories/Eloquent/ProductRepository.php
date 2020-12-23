@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Models\Product;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ProductRepository implements ProductRepositoryInterface
@@ -33,11 +34,11 @@ class ProductRepository implements ProductRepositoryInterface
     public function all()
     {
         return QueryBuilder::for($this->product)
-            ->allowedFilters($this->product->getFillable())
+            ->allowedFilters([...$this->product->getFillable(), AllowedFilter::scope('name_or_brand')])
             ->allowedFields($this->product->getFillable())
             ->allowedSorts($this->product->getFillable())
             ->allowedIncludes($this->product->getRelations())
-            ->paginate()
+            ->paginate(empty(request()->query()['limit']) ? 10 : request()->query()['limit'])
             ->appends(request()->query());
     }
 

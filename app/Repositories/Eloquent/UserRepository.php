@@ -37,7 +37,7 @@ class UserRepository implements UserRepositoryInterface
             ->allowedFields($this->user->getFillable())
             ->allowedSorts($this->user->getFillable())
             ->allowedIncludes($this->user->getRelations())
-            ->paginate()
+            ->paginate(empty(request()->query()['limit']) ? 10 : request()->query()['limit'])
             ->appends(request()->query());
     }
 

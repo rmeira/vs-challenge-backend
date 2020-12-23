@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -108,4 +109,16 @@ class Product extends Model
      * @var \Datetime
      */
     private $updated_at;
+
+    /**
+     * Scope for search on name or brand
+     *
+     * @param Builder $query
+     * @param string $string
+     * @return Builder
+     */
+    public function scopeNameOrBrand(Builder $query, $string): Builder
+    {
+        return $query->where('name', 'like', "%{$string}%")->orWhere('brand', 'like', "%{$string}%");
+    }
 }

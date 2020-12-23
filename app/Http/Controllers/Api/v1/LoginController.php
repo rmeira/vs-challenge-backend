@@ -117,6 +117,39 @@ class LoginController extends Controller
     }
 
     /**
+     *  @OA\Post(
+     *     path="/v1/auth/logout",
+     *     tags={"Auth"},
+     *     summary="Auth logout",
+     *     operationId="auth.logout",
+     *     @OA\RequestBody(
+     *          @OA\MediaType(
+     *              mediaType="application/json",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response=200,
+     *          description="successful operation",
+     *    		@OA\MediaType(
+     *    			mediaType="application/json",
+     *    			@OA\Schema(
+     *    				 @OA\Property(
+     *                      property="boolean",
+     *    					type="boolean",
+     *    					example="true",
+     *    				),
+     *    			),
+     *    		),
+     *    	),
+     * )
+
+     */
+    public function logout(Request $request)
+    {
+        return response()->json($request->user()->token()->revoke());
+    }
+
+    /**
      * Create access token
      *
      * @return array

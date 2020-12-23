@@ -1,6 +1,8 @@
-# VS Challenge
+# VS Challenge Backend
 
-Projeto backend API para o desafio "VS Challenge" leia mais sobre o desafio em [CHALLENGE](./CHALLENGE.md)
+Projeto backend API para o desafio "VS Challenge" leia mais sobre o desafio em [CHALLENGE](./CHALLENGE.md).
+
+O Frontend deste projeto está disponivel em [VS Challenge Frontend](https://github.com/rmeira/vs-challenge-frontend).
 
 ## Installation
 

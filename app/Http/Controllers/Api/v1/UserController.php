@@ -68,6 +68,12 @@ class UserController extends Controller
      *         parameter="page",
      *         @OA\Schema(type="integer")
      *     ),
+     *     @OA\Parameter(
+     *         in="query",
+     *         name="limit",
+     *         parameter="limit",
+     *         @OA\Schema(type="integer")
+     *     ),
      *     @OA\Response(response="200",
      *          @OA\MediaType(
      *              mediaType="application/json",
